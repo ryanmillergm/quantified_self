@@ -1,4 +1,4 @@
-import 'reflect-metadata';
+require('reflect-metadata');
 
 var express = require('express');
 var path = require('path');

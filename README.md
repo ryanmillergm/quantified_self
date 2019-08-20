@@ -17,6 +17,7 @@ TODO: description
 
 ## Local Setup
  - `$ npm install`
+ - `$ npx sequelize db:create`
 
 ## Running the Server Locally
  - `$ npm start`

@@ -14,13 +14,16 @@ var shell = require('shelljs');
 // after((done) => specHelper.after(done));
 
 describe('api v1 foods GET', function () {
+  this.timeout(10000);
+  
   describe('user can get all foods in database', function () {
-    it('returns JSON with id name and calories', function (done) {
+    it('returns JSON with id name and calories', () => {
+
       shell.exec('npx sequelize db:drop');
       shell.exec('npx sequelize db:create');
       shell.exec('npx sequelize db:migrate');
 
-      return Food.bulkCreate([
+      Food.bulkCreate([
         {
         calories: "10",
         name: "peas"
@@ -36,6 +39,7 @@ describe('api v1 foods GET', function () {
       }).then(response => {
         assert.equal(response.statusCode, 200);
         console.log("got response");
+        console.log(response.body);
         // expect(typeof response.body).toEqual(Array);
         // firstFood = response.body.first
         // expect(Object.keys(firstFood)).toContain('id');
@@ -43,8 +47,6 @@ describe('api v1 foods GET', function () {
         // expect(firstFood.calories).toEqual(10);
         // expect(Object.keys(firstFood)).toContain('name');
         // expect(firstFood.name).toEqual('peas');
-
-        done();
       })
     });
   });

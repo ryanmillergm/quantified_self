@@ -17,6 +17,7 @@
     "typeorm": "^0.2.18"
   },
   "devDependencies": {
-    "mocha": "^6.2.0"
+    "mocha": "^6.2.0",
+    "supertest": "^4.0.2"
   }
 }

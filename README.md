@@ -15,5 +15,14 @@ TODO: description
 ## Other Packages
  - TODO
 
+## Local Setup
+ - `$ npm install`
+
+## Running the Server Locally
+ - `$ npm start`
+
+## Running the Test Suite
+ - `$ npm test`
+
 ## Endpoints
 TODO

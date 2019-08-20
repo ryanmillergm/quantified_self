@@ -18,6 +18,7 @@ TODO: description
 ## Local Setup
  - `$ npm install`
  - `$ npx sequelize db:create`
+ - `$ npx sequelize db:migrate`
 
 ## Running the Server Locally
  - `$ npm start`

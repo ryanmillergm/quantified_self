@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha"
+    "test": "nodemon --exec 'mocha */**.test.js"
   },
   "dependencies": {
     "@types/node": "^12.7.2",

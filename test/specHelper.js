@@ -7,10 +7,8 @@ module.exports.before = function() {
   shell.exec('npx sequelize db:migrate');
 }
 
-module.exports.beforeEach = async function(done) {
+module.exports.beforeEach = async function() {
   await Food.destroy({ where: {} })
-  
-  done();
 }
 
 // module.exports.after = function() {

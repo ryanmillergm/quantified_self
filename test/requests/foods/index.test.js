@@ -2,27 +2,22 @@ var app = require('../../../app');
 var request = require("supertest");
 var assert = require('assert');
 var Food = require('../../../models').Food;
-// var specHelper = require('../../specHelper');
-var shell = require('shelljs');
-
-// before((done) => {
-//   specHelper.before();
-//   done();
-// });
-// beforeEach((done) => specHelper.beforeEach(done));
-// afterEach((done) => specHelper.afterEach(done));
-// after((done) => specHelper.after(done));
+var specHelper = require('../../specHelper');
 
 describe('api v1 foods GET', function () {
   this.timeout(10000);
-  
+
+  before((done) => {
+    specHelper.before();
+    done();
+  });
+  beforeEach((done) => {
+    specHelper.beforeEach()
+    done();
+  });
+
   describe('user can get all foods in database', function () {
     it('returns JSON with id name and calories', () => {
-
-      shell.exec('npx sequelize db:drop');
-      shell.exec('npx sequelize db:create');
-      shell.exec('npx sequelize db:migrate');
-
       Food.bulkCreate([
         {
         calories: "10",
@@ -33,20 +28,20 @@ describe('api v1 foods GET', function () {
         name: "candy"
         }
       ]).then(() => {
-        console.log("making http request");
         return request(app)
           .get('/api/v1/foods')
       }).then(response => {
         assert.equal(response.statusCode, 200);
-        console.log("got response");
-        console.log(response.body);
-        // expect(typeof response.body).toEqual(Array);
-        // firstFood = response.body.first
+
+        assert.equal(response.body.length, 2);
+
+        let firstFood = response.body[0];
         // expect(Object.keys(firstFood)).toContain('id');
         // expect(Object.keys(firstFood)).toContain('calories');
-        // expect(firstFood.calories).toEqual(10);
         // expect(Object.keys(firstFood)).toContain('name');
-        // expect(firstFood.name).toEqual('peas');
+
+        assert.equal(firstFood.calories, 10);
+        assert.equal(firstFood.name, 'peas');
       })
     });
   });

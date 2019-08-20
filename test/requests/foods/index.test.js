@@ -1,17 +1,25 @@
+var app = require('../../../app');
 var request = require("supertest");
 var assert = require('assert');
 var Food = require('../../../models').Food;
 var specHelper = require('../../specHelper');
+var shell = require('shelljs');
 
-before((done) => specHelper.before(done));
-beforeEach((done) => specHelper.beforeEach(done));
+// before((done) => {
+//   specHelper.before();
+//   done();
+// });
+// beforeEach((done) => specHelper.beforeEach(done));
 // afterEach((done) => specHelper.afterEach(done));
 // after((done) => specHelper.after(done));
 
 describe('api v1 foods GET', function () {
   describe('user can get all foods in database', function () {
     it('returns JSON with id name and calories', function (done) {
-      console.log("hello!!");
+      shell.exec('npx sequelize db:drop');
+      shell.exec('npx sequelize db:create');
+      shell.exec('npx sequelize db:migrate');
+
       return Food.bulkCreate([
         {
         calories: "10",
@@ -22,6 +30,7 @@ describe('api v1 foods GET', function () {
         name: "candy"
         }
       ]).then(() => {
+        console.log("making http request")
         return request(app)
           .get('/api/v1/foods')
       }).then(response => {

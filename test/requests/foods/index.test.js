@@ -2,7 +2,7 @@ var app = require('../../../app');
 var request = require("supertest");
 var assert = require('assert');
 var Food = require('../../../models').Food;
-var specHelper = require('../../specHelper');
+// var specHelper = require('../../specHelper');
 var shell = require('shelljs');
 
 // before((done) => {
@@ -30,11 +30,12 @@ describe('api v1 foods GET', function () {
         name: "candy"
         }
       ]).then(() => {
-        console.log("making http request")
+        console.log("making http request");
         return request(app)
           .get('/api/v1/foods')
       }).then(response => {
         assert.equal(response.statusCode, 200);
+        console.log("got response");
         // expect(typeof response.body).toEqual(Array);
         // firstFood = response.body.first
         // expect(Object.keys(firstFood)).toContain('id');

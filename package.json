@@ -14,5 +14,8 @@
     "pg": "^7.12.1",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.18"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.0"
   }
 }

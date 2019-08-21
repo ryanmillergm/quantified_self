@@ -4,6 +4,8 @@ node_js:
 cache:
   directories:
   - node_modules
+services:
+  - postgresql
 before_script:
   - npx sequelize db:create
   - npx sequelize db:migrate

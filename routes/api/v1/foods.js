@@ -14,4 +14,20 @@ router.get("/", function (req, res, next) {
   })
 });
 
+/*GET one specific food */
+router.get("/:id", (req, res, next) => {
+  Food.findOne({
+    where: {id: req.params.id},
+    attributes: ['id', 'name', 'calories']
+  })
+  .then(food => {
+    res.setHeader("Content-Type", "application/json");
+    res.status(200).send(JSON.stringify(food));
+  })
+  .catch(error => {
+    res.setHeader("Content-Type", "application/json");
+    res.status(500).send({error})
+  });
+});
+
 module.exports = router;

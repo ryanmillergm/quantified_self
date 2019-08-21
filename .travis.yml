@@ -7,8 +7,7 @@ cache:
 services:
   - postgresql
 before_script:
-  - npx sequelize db:create
-  - npx sequelize db:migrate
+  - psql -c 'create database travis_ci_test;' -U postgres
 deploy:
   provider: herkoku
   api_key:

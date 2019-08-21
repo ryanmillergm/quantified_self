@@ -30,4 +30,27 @@ TODO: description
  - `$ npm test`
 
 ## Endpoints
-TODO
+### List all foods in the database
+Request:
+```
+GET /api/v1/foods
+Accept: application/json
+```
+Example response:
+```
+Status: 200
+Content-Type: application/json
+Body:
+[
+    {
+        "id": 1,
+        "name": "peas",
+        "calories": 10
+    },
+    {
+        "id": 2,
+        "name": "candy bar",
+        "calories": 300
+    }
+]
+```

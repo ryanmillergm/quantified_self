@@ -7,7 +7,8 @@ cache:
 services:
   - postgresql
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
+  - su postgres -c "psql -U postgres -c \"CREATE USER chakeresa WITH ENCRYPTED PASSWORD 'password'\""
+  - su postgres -c "psql -U postgres -c \"CREATE DATABASE quantified_self_test WITH OWNER=chakeresa ENCODING='UTF8'\""
 deploy:
   provider: herkoku
   api_key:

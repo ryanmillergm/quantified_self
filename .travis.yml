@@ -4,7 +4,17 @@ node_js:
 cache:
   directories:
   - node_modules
+before_script:
+  - npx sequelize db:create
+  - npx sequelize db:migrate
 deploy:
   provider: herkoku
   api_key:
     secure: R4YNWMA4dor2zGKfMF3XEkze3jgcAwrvT5NTqy1a1Wz90SZFTOPDuKCGV2NRqqkqRsCV6jyPY7j7sHFJL75F7DHQvFTe4KlKlw7AU4zhvL4cnxp2HNsLHonl8onXcQWyiUVN8YWekn+gAF2k5N7dbkxgyfsak80vx6ECXaosTODe7ZELGbq3StWvyoFQpFirrxd/Ag5+Fxt+4tckQiQKTuWOXHWpp6Bbt0rT4Tq0FyXiEzoI5tuTxWeornuojUmGMjSbgrPfm5iLaMU+lL3p068UcD4ovRyXNk8NwE0HOOZPOmRm0FL0PIOqh3YvRARtJUZqM5/UwgDpv9sSvJiEUwo8x+40xZkG/xLXzqS8lLKWxFKljRN3rO96WaQKKFihASKIQAqVYpidUK5r380ZYKcuqv1+U0/T9MUagdPp4a4wm41qlKnaTxZNcQHIpHMMBce74Yqiww2iFkxlkfY+BVc6qO+Q6OcKmXRyZ3aeXf+t0VbSMrn6FxoqQi+Dl8QvKz1FHrDblRB8zrZ9YREoy0BsF4bW+keDR5tYY4Aenz5QMJNrNdNk7fQ9Cy1RhBqm/Wf08ftzpnBfLr0BAAsIgtZspicr3M+ZUC0mLbWxqM5HQMEHWT8LXYctnjHsKYJAcPE8QnZ1sZXEL3F9E35W/+HQ75h6VQOWgyHcbD42ZWA=
+  app:
+    develop: nutritionaltracker
+    master: nutritionaltracker
+  on:
+    repo: ryanmillergm/quantified_self
+  run:
+    - "sequelize db:migrate"

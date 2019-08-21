@@ -17,7 +17,7 @@ describe('api v1 foods GET', function () {
   });
 
   describe('user can get all foods in database', function () {
-    it('returns JSON with id name and calories', () => {
+    it('returns JSON with id name and calories', (done) => {
       Food.bulkCreate([
         {
         calories: "10",
@@ -40,16 +40,20 @@ describe('api v1 foods GET', function () {
 
         expect(firstFood.calories).to.equal(10);
         expect(firstFood.name).to.equal('peas');
+
+        done();
       })
     });
 
-    it('returns 200 if no results', () => {
+    it('returns 200 if no results', (done) => {
       request(app)
         .get('/api/v1/foods')
       .then(response => {
         expect(response.statusCode).to.equal(200);
 
         expect(response.body).to.have.lengthOf(0);
+
+        done();
       })
     });
   });

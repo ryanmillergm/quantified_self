@@ -11,6 +11,6 @@ module.exports.beforeEach = async function() {
   await Food.destroy({ where: {} })
 }
 
-// module.exports.after = function() {
-//   shell.exec('npx sequelize db:drop');
-// }
+module.exports.after = function() {
+  shell.exec('npx sequelize db:drop');
+}

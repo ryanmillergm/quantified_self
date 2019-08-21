@@ -26,6 +26,7 @@ View the project board at https://github.com/ryanmillergm/quantified_self/projec
 ## Local Setup
  - `$ git clone git@github.com:ryanmillergm/quantified_self.git`
  - `$ cd quantified_self`
+ - `$ createuser postgres -d`
  - `$ npm install`
  - `$ npx sequelize db:create`
  - `$ npx sequelize db:migrate`

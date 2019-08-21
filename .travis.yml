@@ -7,8 +7,7 @@ cache:
 services:
   - postgresql
 before_script:
-  - su postgres -c "psql -U postgres -c \"CREATE USER chakeresa\""
-  - su postgres -c "psql -U postgres -c \"CREATE DATABASE quantified_self_test WITH OWNER=chakeresa ENCODING='UTF8'\""
+  - psql -c "CREATE USER chakeresa WITH PASSWORD 'chakeresa';" -U postgres
 deploy:
   provider: herkoku
   api_key:

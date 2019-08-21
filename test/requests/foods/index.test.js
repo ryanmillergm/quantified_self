@@ -42,5 +42,15 @@ describe('api v1 foods GET', function () {
         expect(firstFood.name).to.equal('peas');
       })
     });
+
+    it('returns 200 if no results', () => {
+      request(app)
+        .get('/api/v1/foods')
+      .then(response => {
+        expect(response.statusCode).to.equal(200);
+
+        expect(response.body).to.have.lengthOf(0);
+      })
+    });
   });
 });

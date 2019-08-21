@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "chakeresa",
+    "username": "postgres",
     "password": null,
     "database": "quantified_self_development",
     "host": "127.0.0.1",

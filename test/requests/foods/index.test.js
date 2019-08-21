@@ -15,6 +15,10 @@ describe('api v1 foods GET', function () {
     specHelper.beforeEach()
     done();
   });
+  after((done) => {
+    specHelper.after()
+    done();
+  });
 
   describe('user can get all foods in database', function () {
     it('returns JSON with id name and calories', (done) => {

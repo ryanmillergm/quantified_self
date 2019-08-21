@@ -17,7 +17,6 @@
   },
   "production": {
     "use_env_variable": "DATABASE_URL",
-    "username": "chakeresa",
     "password": null,
     "database": "quantified_self_production",
     "host": "nutritionaltracker.herokuapp.com",

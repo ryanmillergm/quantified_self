@@ -4,7 +4,7 @@ var Food = require('../../../models').Food;
 
 /*GET all foods*/
 router.get("/", function (req, res, next) {
-  return Food.findAll()
+  return Food.findAll({ attributes: ['id', 'name', 'calories'] })
   .then(foods => {
     res.setHeader("Content-Type", "application/json");
     res.status(200).send(JSON.stringify(foods));

@@ -37,6 +37,8 @@ describe('api v1 foods GET', function () {
 
         let firstFood = response.body[0];
         expect(firstFood).to.include.all.keys('id', 'calories', 'name');
+        expect(firstFood).to.not.include.key('createdAt');
+        expect(firstFood).to.not.include.key('updatedAt');
 
         expect(firstFood.calories).to.equal(10);
         expect(firstFood.name).to.equal('peas');

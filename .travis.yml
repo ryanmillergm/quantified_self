@@ -8,7 +8,7 @@ services:
   - postgresql
 before_script:
   - psql -c "CREATE USER chakeresa WITH PASSWORD 'chakeresa';" -U postgres
-  - psql -U postgres -c \"CREATE DATABASE quantified_self_test WITH OWNER=chakeresa ENCODING='UTF8'\"
+  - psql -U postgres -c \"CREATE DATABASE quantified_self_test\"
 deploy:
   provider: herkoku
   api_key:

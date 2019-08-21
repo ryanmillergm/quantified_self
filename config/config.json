@@ -8,7 +8,7 @@
     "operatorsAliases": false
   },
   "test": {
-    "username": "chakeresa",
+    "username": "postgres",
     "password": null,
     "database": "quantified_self_test",
     "host": "127.0.0.1",

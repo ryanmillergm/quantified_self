@@ -1,6 +1,6 @@
 var app = require('../../../app');
 var request = require("supertest");
-var assert = require('assert');
+var expect = require('chai').expect;
 var Food = require('../../../models').Food;
 var specHelper = require('../../specHelper');
 
@@ -31,17 +31,15 @@ describe('api v1 foods GET', function () {
         return request(app)
           .get('/api/v1/foods')
       }).then(response => {
-        assert.equal(response.statusCode, 200);
+        expect(response.statusCode).to.equal(200);
 
-        assert.equal(response.body.length, 2);
+        expect(response.body).to.have.lengthOf(2);
 
         let firstFood = response.body[0];
-        // expect(Object.keys(firstFood)).toContain('id');
-        // expect(Object.keys(firstFood)).toContain('calories');
-        // expect(Object.keys(firstFood)).toContain('name');
+        expect(firstFood).to.include.all.keys('id', 'calories', 'name');
 
-        assert.equal(firstFood.calories, 10);
-        assert.equal(firstFood.name, 'peas');
+        expect(firstFood.calories).to.equal(10);
+        expect(firstFood.name).to.equal('peas');
       })
     });
   });

@@ -1,9 +1,14 @@
 # Quantified Self
-TODO: description
+This REST API... (TODO) All responses are JSON.
 
-## Core Contributors
- - Alexandra Chakeres, [@chakeresa](https://github.com/chakeresa)
- - Ryan Miller, [@ryanmillergm](https://github.com/ryanmillergm)
+The app is deployed at https://nutritionaltracker.herokuapp.com/.
+
+This project was part of [Turing School of Software & Design](https://turing.io)'s Back End Engineering program (Mod 4). See the project spec [here](https://backend.turing.io/module4/projects/quantified_self/qs_server_side). It was completed in 10 days by [Alexandra Chakeres](https://github.com/chakeresa) and [Ryan Miller](https://github.com/ryanmillergm).
+
+View the project board at https://github.com/ryanmillergm/quantified_self/projects/2.
+
+## Schema
+![schema](./public/images/schema.png)
 
 ## Tech Stack
  - Framework: Express v4.16.4
@@ -19,17 +24,20 @@ TODO: description
  - Make HTTP requests in tests: supertest
 
 ## Local Setup
+ - `$ git clone git@github.com:ryanmillergm/quantified_self.git`
+ - `$ cd quantified_self`
  - `$ npm install`
  - `$ npx sequelize db:create`
  - `$ npx sequelize db:migrate`
 
 ## Running the Server Locally
  - `$ npm start` or `$ nodemon`
+ - Access endpoints at `http://localhost:3000`
 
 ## Running the Test Suite
  - `$ npm test`
 
-## Endpoints
+## API Endpoints
 ### List all foods in the database
 Request:
 ```
@@ -54,3 +62,12 @@ Body:
     }
 ]
 ```
+
+## Core Contributors
+ - Alexandra Chakeres, [@chakeresa](https://github.com/chakeresa)
+ - Ryan Miller, [@ryanmillergm](https://github.com/ryanmillergm)
+
+### How to Contribute
+ - Fork and clone the [repo](https://github.com/ryanmillergm/quantified_self)
+ - Make changes on your fork & push them to GitHub
+ - Visit https://github.com/ryanmillergm/quantified_self/pulls and click `New pull request`

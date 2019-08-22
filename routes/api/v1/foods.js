@@ -32,4 +32,26 @@ router.delete("/:id", function (req, res, next) {
   })
 });
 
+/*UPDATE a food given the id*/
+router.patch("/:id", function (req, res, next) {
+  console.log(req.body)
+  return Food.update({
+    name: req.body.name,
+    calories: req.body.calories
+  },
+  {
+    returning: true,
+    where: {
+      id: parseInt(req.params.id)
+    }
+  })
+  .then(food => {
+    res.setHeader("Content-Type", "application/json")
+    res.status(202).send(JSON.stringify(food))
+  })
+  .catch(err => {
+    res.status(400).send(JSON.stringify({ error: err }))
+  })
+})
+
 module.exports = router;

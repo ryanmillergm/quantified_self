@@ -16,14 +16,13 @@ describe('api v1 foods POST', function () {
           })
           .expect(201)
           .expect('Content-Type', /json/)
-          .end(function(err, res) {
-            if (err) done(err);
-            res.body.should.have.property('name');
-            res.body.should.have.property('calories');
-            res.body.participant.should.have.property("frog legs")
-            res.body.participant.should.have.property(200)
-            console.log(res.body)
-            });
+          .then(response => {
+            let newFood = response.body;
+            expect(newFood).to.include.all.keys('id', 'calories', 'name');
+
+            expect(newFood.calories).to.equal(200);
+            expect(newFood.name).to.equal('frog legs');
+          })
           done();
         })
   });

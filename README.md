@@ -26,6 +26,7 @@ View the project board at https://github.com/ryanmillergm/quantified_self/projec
 ## Local Setup
  - `$ git clone git@github.com:ryanmillergm/quantified_self.git`
  - `$ cd quantified_self`
+ - `$ createuser postgres -d`
  - `$ npm install`
  - `$ npx sequelize db:create`
  - `$ npx sequelize db:migrate`
@@ -61,6 +62,20 @@ Body:
         "calories": 300
     }
 ]
+```
+
+### Remove a food from the database (based on the id)
+Request (enter the id of the food into `:id`):
+```
+DELETE /api/v1/foods/:id
+```
+Successful deletion response:
+```
+Status: 204
+```
+Failed deletion response (did not find a food with that id):
+```
+Status: 404
 ```
 
 ## Core Contributors

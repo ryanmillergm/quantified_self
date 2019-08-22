@@ -15,6 +15,7 @@ router.get("/", function (req, res, next) {
   })
 });
 
+
 /*GET one specific food */
 router.get("/:id", (req, res, next) => {
   Food.findOne({
@@ -61,6 +62,23 @@ router.post("/", (req, res, next) => {
       res.setHeader("Content-Type", "application/json");
       res.status(400).send({error});
     });
+
+/*DELETE a food given the id*/
+router.delete("/:id", function (req, res, next) {
+  return Food.findByPk(req.params.id)
+  .then(food => {
+    if (food) {
+      return food.destroy()
+      .then(() => {
+        res.status(204).send();
+      })
+    } else {
+      res.status(404).send();
+    }
+  })
+  .catch(err => {
+    res.status(500).send(JSON.stringify({ error: err }));
+  })
 });
 
 module.exports = router;

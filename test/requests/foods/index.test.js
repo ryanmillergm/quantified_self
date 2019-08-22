@@ -4,7 +4,6 @@ var expect = require('chai').expect;
 var Food = require('../../../models').Food;
 
 describe('api v1 foods GET', function () {
-
   describe('user can get all foods in database', function () {
     it('returns JSON with id name and calories', (done) => {
       Food.bulkCreate([

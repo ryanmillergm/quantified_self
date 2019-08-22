@@ -26,18 +26,18 @@ describe('api v1 foods DELETE', function () {
           .del(`/api/v1/foods/${food.id}`)
       }).then(response => {
         expect(response.statusCode).to.equal(204);
-
+        
         return Food.count()
       }).then((count) => {
         expect(count).to.equal(1);
-
+        
         done();
       })
     });
-
+    
     it('returns 404 if no food has that id', (done) => {
       request(app)
-        .del('/api/v1/foods/1')
+      .del('/api/v1/foods/1')
       .then(response => {
         expect(response.statusCode).to.equal(404);
 

@@ -5,7 +5,7 @@ var Food = require('../../../models').Food;
 var specHelper = require('../../specHelper');
 
 describe('api v1 foods DELETE', function () {
-  this.timeout(10000);
+  this.timeout(20000);
 
   before((done) => {
     specHelper.before();
@@ -21,7 +21,7 @@ describe('api v1 foods DELETE', function () {
   });
 
   describe('user can remove a food from the database', function () {
-    it('returns 200 upon deletion', (done) => {
+    it('returns 204 upon deletion', (done) => {
       Food.bulkCreate([
         {
         calories: "10",

@@ -5,7 +5,7 @@ var Food = require('../../../models').Food;
 var specHelper = require('../../specHelper');
 
 describe('api v1 foods GET', function () {
-  this.timeout(10000);
+  this.timeout(20000);
 
   before((done) => {
     specHelper.before();

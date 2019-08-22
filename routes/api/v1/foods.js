@@ -1,3 +1,4 @@
+const Joi = require('@hapi/joi');
 var express = require("express");
 var router = express.Router();
 var Food = require('../../../models').Food;
@@ -32,7 +33,17 @@ router.get("/:id", (req, res, next) => {
 
 /*POST a food */
 router.post("/", (req, res, next) => {
-  console.log("I'm trying to post")
+  const schema = {
+    name: Joi.string().min(2).max(30).required(),
+    calories: Joi.number().integer().required()
+  };
+  const result = Joi.validate(req.body, schema);
+  console.log(result)
+  if (result.error) {
+    res.status(400).send(result.error.details[0].message);
+    return;
+  }
+
   Food.create({
           name: req.body.name,
           calories: req.body.calories
@@ -46,5 +57,5 @@ router.post("/", (req, res, next) => {
       res.status(400).send({error});
     });
 });
- 
+
 module.exports = router;

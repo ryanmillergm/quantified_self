@@ -11,8 +11,9 @@ describe('api v1 foods POST', function () {
       request(app)
         .post('/api/v1/foods')
           .send({
+            food: {
             name: "frog legs",
-            calories: 200
+            calories: 200 }
           })
           .expect(201)
           .expect('Content-Type', /json/)

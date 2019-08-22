@@ -13,16 +13,15 @@ describe('api v1 foods POST', function () {
             name: "frog legs",
             calories: 200
           })
-          .expect(201)
-          .expect('Content-Type', /json/)
           .then(response => {
             let newFood = response.body;
+            expect(response.statusCode).to.equal(201)
             expect(newFood).to.include.all.keys('id', 'calories', 'name');
 
             expect(newFood.calories).to.equal(200);
             expect(newFood.name).to.equal('frog legs');
+           done();
           })
-          done();
         });
 
     it('returns a status 400 if no name is given', (done) => {
@@ -31,14 +30,12 @@ describe('api v1 foods POST', function () {
           .send({
             calories: 200
           })
-          .expect(400)
-          .expect('Content-Type', /json/)
           .then(response => {
             let noNameFood = response.body;
-            console.log(noNameFood)
-            expect(noNameFood).to.equal(`"name" is required`)
+            expect(response.statusCode).to.equal(400)
+            expect(noNameFood).to.equal({error: `"name" is required`})
+            done();
           })
-          done();
         })
 
     it('returns a status 400 if no calories are given', (done) => {
@@ -47,13 +44,12 @@ describe('api v1 foods POST', function () {
           .send({
             name: "frog legs"
           })
-          .expect(400)
-          .expect('Content-Type', /json/)
           .then(response => {
             let noCalorieFood = response.body;
-            expect(noCalorieFood).to.equal(`"calories" is required`)
+            expect(response.statusCode).to.equal(400)
+            expect(noCalorieFood).to.equal({error: `"calories" is required`})
+            done();
           })
-          done();
         })
   });
 });

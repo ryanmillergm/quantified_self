@@ -45,12 +45,14 @@ describe('api v1 foods GET', function () {
       request(app)
         .get('/api/v1/foods/5')
       .then(response => {
+        this.timeout(10000);
         expect(response.statusCode).to.equal(404);
 
-        expect(response.body).to.have.lengthOf(0);
+        expect(response.body).to.equal({ error: 'That food does not exist' });
 
         done();
       })
+      done();
     });
   });
 });

@@ -18,35 +18,33 @@ router.get("/", function (req, res, next) {
 
 /*GET one specific food */
 router.get("/:id", (req, res, next) => {
+  res.setHeader("Content-Type", "application/json");
   Food.findOne({
     where: {id: req.params.id},
     attributes: ['id', 'name', 'calories']
   })
   .then(food => {
     if (food != null) {
-    res.setHeader("Content-Type", "application/json");
     res.status(200).send(JSON.stringify(food));
   } else {
-    res.setHeader("Content-Type", "application/json");
     res.status(404).send({ error: "That food does not exist" })
   }
   })
-  .catch(error => {
-    res.setHeader("Content-Type", "application/json");
+  .catch(err => {
     res.status(404).send({ error: err })
   });
 });
 
 /*POST a food */
 router.post("/", (req, res, next) => {
+  res.setHeader("Content-Type", "application/json");
   const schema = {
     name: Joi.string().min(2).max(30).required(),
     calories: Joi.number().integer().required()
   };
   const result = Joi.validate(req.body, schema);
-  console.log(result)
   if (result.error) {
-    res.status(400).send(result.error.details[0].message);
+    res.status(400).send({error: result.error.details[0].message});
     return;
   }
 
@@ -55,13 +53,11 @@ router.post("/", (req, res, next) => {
           calories: req.body.calories
     })
     .then(food => {
-      res.setHeader("Content-Type", "application/json");
       res.status(201).send(JSON.stringify(food));
     })
-    .catch(error => {
-      res.setHeader("Content-Type", "application/json");
-      res.status(400).send({error});
-    });
+    .catch(err => {
+      res.status(400).send({error: err});
+   });
 
 /*DELETE a food given the id*/
 router.delete("/:id", function (req, res, next) {

@@ -4,7 +4,7 @@ var expect = require('chai').expect;
 var Food = require('../../../models').Food;
 var specHelper = require('../../specHelper');
 
-describe('api v1 foods POST', function () {
+ describe('api v1 foods POST', function () {
   describe('user can add a food to the database', function () {
     it('returns JSON with id, name and calories', (done) => {
       request(app)
@@ -18,13 +18,13 @@ describe('api v1 foods POST', function () {
             expect(response.statusCode).to.equal(201)
             expect(newFood).to.include.all.keys('id', 'calories', 'name');
 
-            expect(newFood.calories).to.equal(200);
+             expect(newFood.calories).to.equal(200);
             expect(newFood.name).to.equal('frog legs');
            done();
           })
         });
 
-    it('returns a status 400 if no name is given', (done) => {
+     it('returns a status 400 if no name is given', (done) => {
       request(app)
         .post('/api/v1/foods')
           .send({
@@ -33,12 +33,12 @@ describe('api v1 foods POST', function () {
           .then(response => {
             let noNameFood = response.body;
             expect(response.statusCode).to.equal(400)
-            expect(noNameFood).to.equal({error: `"name" is required`})
+            expect(noNameFood).to.deep.equal({error: `"name" is required`})
             done();
           })
         })
 
-    it('returns a status 400 if no calories are given', (done) => {
+     it('returns a status 400 if no calories are given', (done) => {
       request(app)
         .post('/api/v1/foods')
           .send({
@@ -47,7 +47,7 @@ describe('api v1 foods POST', function () {
           .then(response => {
             let noCalorieFood = response.body;
             expect(response.statusCode).to.equal(400)
-            expect(noCalorieFood).to.equal({error: `"calories" is required`})
+            expect(noCalorieFood).to.deep.equal({error: `"calories" is required`})
             done();
           })
         })

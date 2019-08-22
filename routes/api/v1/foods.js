@@ -15,7 +15,6 @@ router.get("/", function (req, res, next) {
   })
 });
 
-
 /*GET one specific food */
 router.get("/:id", (req, res, next) => {
   res.setHeader("Content-Type", "application/json");
@@ -58,6 +57,7 @@ router.post("/", (req, res, next) => {
     .catch(err => {
       res.status(400).send({error: err});
    });
+ })
 
 /*DELETE a food given the id*/
 router.delete("/:id", function (req, res, next) {

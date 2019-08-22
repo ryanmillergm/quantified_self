@@ -2,24 +2,8 @@ var app = require('../../../app');
 var request = require("supertest");
 var expect = require('chai').expect;
 var Food = require('../../../models').Food;
-var specHelper = require('../../specHelper');
 
 describe('api v1 foods DELETE', function () {
-  this.timeout(20000);
-
-  before((done) => {
-    specHelper.before();
-    done();
-  });
-  beforeEach((done) => {
-    specHelper.beforeEach()
-    done();
-  });
-  after((done) => {
-    specHelper.after()
-    done();
-  });
-
   describe('user can remove a food from the database', function () {
     it('returns 204 upon deletion', (done) => {
       Food.bulkCreate([

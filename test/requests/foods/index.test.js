@@ -2,23 +2,8 @@ var app = require('../../../app');
 var request = require("supertest");
 var expect = require('chai').expect;
 var Food = require('../../../models').Food;
-var specHelper = require('../../specHelper');
 
 describe('api v1 foods GET', function () {
-  this.timeout(20000);
-
-  before((done) => {
-    specHelper.before();
-    done();
-  });
-  beforeEach((done) => {
-    specHelper.beforeEach()
-    done();
-  });
-  after((done) => {
-    specHelper.after()
-    done();
-  });
 
   describe('user can get all foods in database', function () {
     it('returns JSON with id name and calories', (done) => {

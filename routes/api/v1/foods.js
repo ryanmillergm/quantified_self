@@ -1,3 +1,4 @@
+const Joi = require('@hapi/joi');
 var express = require("express");
 var router = express.Router();
 var Food = require('../../../models').Food;
@@ -13,6 +14,50 @@ router.get("/", function (req, res, next) {
     res.status(500).send(JSON.stringify({ error: err }));
   })
 });
+
+/*GET one specific food */
+router.get("/:id", (req, res, next) => {
+  res.setHeader("Content-Type", "application/json");
+  Food.findOne({
+    where: {id: req.params.id},
+    attributes: ['id', 'name', 'calories']
+  })
+  .then(food => {
+    if (food != null) {
+    res.status(200).send(JSON.stringify(food));
+  } else {
+    res.status(404).send({ error: "That food does not exist" })
+  }
+  })
+  .catch(err => {
+    res.status(404).send({ error: err })
+  });
+});
+
+/*POST a food */
+router.post("/", (req, res, next) => {
+  res.setHeader("Content-Type", "application/json");
+  const schema = {
+    name: Joi.string().min(2).max(30).required(),
+    calories: Joi.number().integer().required()
+  };
+  const result = Joi.validate(req.body, schema);
+  if (result.error) {
+    res.status(400).send({error: result.error.details[0].message});
+    return;
+  }
+
+  Food.create({
+          name: req.body.name,
+          calories: req.body.calories
+    })
+    .then(food => {
+      res.status(201).send(JSON.stringify(food));
+    })
+    .catch(err => {
+      res.status(400).send({error: err});
+   });
+ })
 
 /*DELETE a food given the id*/
 router.delete("/:id", function (req, res, next) {

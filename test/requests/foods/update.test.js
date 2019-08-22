@@ -25,22 +25,21 @@ describe('api v1 foods UPDATE', function () {
           })
       }).then(response => {
         let updatedFood = response.body
-        console.log(updatedFood)
+
         expect(response.statusCode).to.equal(202);
-
       })
       done();
     });
 
-    it('returns 404 if no food has that id', (done) => {
-      request(app)
-      .patch('/api/v1/foods/54')
-      .then(response => {
-        expect(response.statusCode).to.equal(404);
-
-        done();
-      })
-      done();
-    });
+    // it('returns 404 if no food has that id', (done) => {
+    //   request(app)
+    //   .patch('/api/v1/foods/54')
+    //   .then(response => {
+    //     expect(response.statusCode).to.equal(404);
+    //
+    //     done();
+    //   })
+    //   done();
+    // });
   });
 });

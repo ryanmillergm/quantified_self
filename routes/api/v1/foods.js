@@ -34,7 +34,6 @@ router.delete("/:id", function (req, res, next) {
 
 /*UPDATE a food given the id*/
 router.patch("/:id", function (req, res, next) {
-  console.log(req.body)
   return Food.update({
     name: req.body.name,
     calories: req.body.calories

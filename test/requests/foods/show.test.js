@@ -3,7 +3,7 @@ var request = require("supertest");
 var expect = require('chai').expect;
 var Food = require('../../../models').Food;
 
-describe('api v1 foods GET', function () {
+describe('api v1 foods GET :id', function () {
   describe('user can get one specific food in database', function () {
     it('returns JSON with id, name and calories', (done) => {
       Food.bulkCreate([
@@ -26,7 +26,6 @@ describe('api v1 foods GET', function () {
         return request(app)
           .get('/api/v1/foods/3')
       }).then(response => {
-        console.log(response.body)
         expect(response.statusCode).to.equal(200);
 
         let specificFood = response.body;
@@ -36,7 +35,6 @@ describe('api v1 foods GET', function () {
 
         expect(specificFood.calories).to.equal(200);
         expect(specificFood.name).to.equal('frog legs');
-
         done();
       })
     });
@@ -52,7 +50,6 @@ describe('api v1 foods GET', function () {
 
         done();
       })
-      done();
     });
   });
 });

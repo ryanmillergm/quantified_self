@@ -22,12 +22,17 @@ router.get("/:id", (req, res, next) => {
     attributes: ['id', 'name', 'calories']
   })
   .then(food => {
+    if (food != null) {
     res.setHeader("Content-Type", "application/json");
     res.status(200).send(JSON.stringify(food));
+  } else {
+    res.setHeader("Content-Type", "application/json");
+    res.status(404).send({ error: "That food does not exist" })
+  }
   })
   .catch(error => {
     res.setHeader("Content-Type", "application/json");
-    res.status(404).send({error})
+    res.status(404).send({ error: err })
   });
 });
 

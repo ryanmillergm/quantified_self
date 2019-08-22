@@ -14,7 +14,7 @@ router.get("/", function (req, res, next) {
   })
 });
 
-/*DESTROY a food given the id*/
+/*DELETE a food given the id*/
 router.delete("/:id", function (req, res, next) {
   return Food.findByPk(req.params.id)
   .then(food => {

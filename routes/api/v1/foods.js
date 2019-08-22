@@ -26,7 +26,7 @@ router.get("/:id", (req, res, next) => {
   })
   .catch(error => {
     res.setHeader("Content-Type", "application/json");
-    res.status(500).send({error})
+    res.status(404).send({error})
   });
 });
 

@@ -64,6 +64,20 @@ Body:
 ]
 ```
 
+### Remove a food from the database (based on the id)
+Request (enter the id of the food into `:id`):
+```
+DELETE /api/v1/foods/:id
+```
+Successful deletion response:
+```
+Status: 204
+```
+Failed deletion response (did not find a food with that id):
+```
+Status: 404
+```
+
 ## Core Contributors
  - Alexandra Chakeres, [@chakeresa](https://github.com/chakeresa)
  - Ryan Miller, [@ryanmillergm](https://github.com/ryanmillergm)

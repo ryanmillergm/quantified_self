@@ -17,29 +17,34 @@ describe('api v1 foods UPDATE', function () {
         calories: "300",
         name: "candy"
         }
-      ]).then(() => {
+      ])
+      .then(() => {
         return request(app)
-          .patch(`/api/v1/foods/1`).send({
+          .patch(`/api/v1/foods/1`)
+          .send({
             name: "frog legs",
             calories: 250
           })
-      }).then(response => {
-        let updatedFood = response.body
+      })
+      .then(response => {
+        let updatedFood = response.body[1][0];
 
         expect(response.statusCode).to.equal(202);
+        expect(updatedFood.name).to.equal('frog legs')
+        expect(updatedFood.calories).to.equal(250)
+      done();
+      })
+    });
+
+    it('returns 404 if no food has that id', (done) => {
+      request(app)
+      .patch('/api/v1/foods/54')
+      .then(response => {
+        expect(response.statusCode).to.equal(404);
+    
+        done();
       })
       done();
     });
-
-    // it('returns 404 if no food has that id', (done) => {
-    //   request(app)
-    //   .patch('/api/v1/foods/54')
-    //   .then(response => {
-    //     expect(response.statusCode).to.equal(404);
-    //
-    //     done();
-    //   })
-    //   done();
-    // });
   });
 });

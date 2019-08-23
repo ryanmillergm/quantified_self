@@ -15,7 +15,7 @@ router.get("/", function (req, res, next) {
   })
 });
 
-/*GET one specific food */
+/*GET food by id */
 router.get("/:id", (req, res, next) => {
   res.setHeader("Content-Type", "application/json");
   Food.findOne({

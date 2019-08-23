@@ -87,11 +87,12 @@ POST /api/v1/foods
 Accept: application/json
 ```
 Both name and calories are required fields.
-Pass in the following parameters:
+Pass in the following parameters in the body of the request:
 ```
 {
     "food": {
-        "name": "Name of food here", "calories": "Calories here"
+        "name": "Name of food here",
+        "calories": "Calories here"
       }
 }
 ```
@@ -109,7 +110,8 @@ Body:
 Failed post response (did not include name or calorie):
 ```
 Status: 400
-"name" is a required field.
+Body:
+{ "error": '"name" is a required field.' }
 ```
 ### Update an existing food by id in the database
 Request:
@@ -117,18 +119,15 @@ Request:
 PATCH /api/v1/foods/:id
 Accept: application/json
 ```
-Pass in the following parameters:
+Pass in the following parameters in the body of the request:
 ```
 {
     "food":
       {
-        "name": "Mint", "calories": "14"
+        "name": "Mint",
+        "calories": "14"
       }
 }
-```
-Failed deletion response (did not find a food with that id):
-```
-Status: 400
 ```
 Example response:
 ```
@@ -140,6 +139,10 @@ Body:
     "name": "Mint",
     "calories": 14
 }
+```
+Failed deletion response (did not find a food with that id):
+```
+Status: 400
 ```
 ### Remove a food from the database (based on the id)
 Request (enter the id of the food into `:id`):

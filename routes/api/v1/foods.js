@@ -2,6 +2,7 @@ const Joi = require('@hapi/joi');
 var express = require("express");
 var router = express.Router();
 var Food = require('../../../models').Food;
+var foodSerializer = require('../../../util/serializers/food');
 
 /*GET all foods*/
 router.get("/", function (req, res, next) {
@@ -15,7 +16,7 @@ router.get("/", function (req, res, next) {
   })
 });
 
-/*GET one specific food */
+/*GET food by id */
 router.get("/:id", (req, res, next) => {
   res.setHeader("Content-Type", "application/json");
   Food.findOne({
@@ -41,18 +42,19 @@ router.post("/", (req, res, next) => {
     name: Joi.string().min(2).max(30).required(),
     calories: Joi.number().integer().required()
   };
-  const result = Joi.validate(req.body, schema);
+  let food = req.body.food
+  const result = Joi.validate(food, schema);
   if (result.error) {
     res.status(400).send({error: result.error.details[0].message});
     return;
   }
 
   Food.create({
-          name: req.body.name,
-          calories: req.body.calories
+          name: food.name,
+          calories: food.calories
     })
     .then(food => {
-      res.status(201).send(JSON.stringify(food));
+      res.status(201).send(JSON.stringify(foodSerializer(food)));
     })
     .catch(err => {
       res.status(400).send({error: err});
@@ -76,5 +78,33 @@ router.delete("/:id", function (req, res, next) {
     res.status(500).send(JSON.stringify({ error: err }));
   })
 });
+
+/*UPDATE a food given the id*/
+router.patch("/:id", function (req, res, next) {
+  return Food.findByPk(req.params.id)
+  .then(food => {
+    if (food === null){
+      res.status(400).send({ error: "That food does not exist" })
+      return
+    } else {
+      return food.update({
+        name: req.body.food.name,
+        calories: req.body.food.calories
+      },
+      {
+        returning: true
+      })
+      .then(response => {
+        food = response["dataValues"]
+        res.setHeader("Content-Type", "application/json")
+        res.status(202).send(JSON.stringify(foodSerializer(food)))
+      })
+    }
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).send(JSON.stringify({ error: err }))
+  })
+})
 
 module.exports = router;

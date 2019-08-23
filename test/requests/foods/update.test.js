@@ -3,7 +3,7 @@ var request = require("supertest");
 var expect = require('chai').expect;
 var Food = require('../../../models').Food;
 
-describe('api v1 foods UPDATE', function () {
+describe('api v1 foods :id PATCH', function () {
   describe('user can update a food from the database', function () {
     it('returns 202 when food is successfully updated', (done) => {
       Food.bulkCreate([

@@ -140,10 +140,6 @@ Body:
     "calories": 14
 }
 ```
-Failed deletion response (did not find a food with that id):
-```
-Status: 400
-```
 ### Remove a food from the database (based on the id)
 Request (enter the id of the food into `:id`):
 ```

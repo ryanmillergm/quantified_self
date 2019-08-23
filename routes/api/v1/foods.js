@@ -80,22 +80,30 @@ router.delete("/:id", function (req, res, next) {
 
 /*UPDATE a food given the id*/
 router.patch("/:id", function (req, res, next) {
-  return Food.update({
-    name: req.body.name,
-    calories: req.body.calories
-  },
-  {
-    returning: true,
-    where: {
-      id: parseInt(req.params.id)
+  return Food.findByPk(req.params.id)
+  .then(food => {
+    if (food === null){
+      res.status(400).send({ error: "That food does not exist" })
+      return
+    } else {
+      return food.update({
+        name: req.body.food.name,
+        calories: req.body.food.calories
+      },
+      {
+        returning: true
+      })
+      .then(food => {
+        console.log(food)
+        response = food["dataValues"]
+        res.setHeader("Content-Type", "application/json")
+        res.status(202).send(JSON.stringify(response))
+      })
     }
   })
-  .then(food => {
-    res.setHeader("Content-Type", "application/json")
-    res.status(202).send(JSON.stringify(food[1][0]))
-  })
   .catch(err => {
-    res.status(400).send(JSON.stringify({ error: err }))
+    console.log(err)
+    res.status(500).send(JSON.stringify({ error: err }))
   })
 })
 

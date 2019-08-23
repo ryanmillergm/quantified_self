@@ -22,13 +22,15 @@ describe('api v1 foods UPDATE', function () {
         return request(app)
           .patch(`/api/v1/foods/1`)
           .send({
-            name: "frog legs",
-            calories: 250
+            food: {
+              name: "frog legs",
+              calories: 250
+            }
           })
       })
       .then(response => {
         let updatedFood = response.body;
-
+        console.log(updatedFood)
         expect(response.statusCode).to.equal(202);
         expect(updatedFood.name).to.equal('frog legs')
         expect(updatedFood.calories).to.equal(250)
@@ -40,6 +42,8 @@ describe('api v1 foods UPDATE', function () {
       request(app)
       .patch('/api/v1/foods/54')
       .then(response => {
+        console.log(response.statusCode)
+        console.log(response.body)
         expect(response.statusCode).to.equal(400);
 
         done();

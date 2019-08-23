@@ -87,7 +87,7 @@ describe('api v1 meals GET', function () {
               expect(response.body).to.have.lengthOf(2);
 
               let firstMeal = response.body[0];
-              expect(firstMeal.foods).to.equal([]);
+              expect(firstMeal.foods).to.deep.equal([]);
 
               done();
             })

@@ -27,7 +27,7 @@ describe('api v1 foods UPDATE', function () {
           })
       })
       .then(response => {
-        let updatedFood = response.body[1][0];
+        let updatedFood = response.body;
 
         expect(response.statusCode).to.equal(202);
         expect(updatedFood.name).to.equal('frog legs')
@@ -40,11 +40,10 @@ describe('api v1 foods UPDATE', function () {
       request(app)
       .patch('/api/v1/foods/54')
       .then(response => {
-        expect(response.statusCode).to.equal(404);
-    
+        expect(response.statusCode).to.equal(400);
+
         done();
       })
-      done();
     });
   });
 });

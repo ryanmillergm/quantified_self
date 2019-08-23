@@ -41,15 +41,16 @@ router.post("/", (req, res, next) => {
     name: Joi.string().min(2).max(30).required(),
     calories: Joi.number().integer().required()
   };
-  const result = Joi.validate(req.body, schema);
+  let food = req.body.food
+  const result = Joi.validate(food, schema);
   if (result.error) {
     res.status(400).send({error: result.error.details[0].message});
     return;
   }
 
   Food.create({
-          name: req.body.name,
-          calories: req.body.calories
+          name: food.name,
+          calories: food.calories
     })
     .then(food => {
       res.status(201).send(JSON.stringify(food));
@@ -91,7 +92,7 @@ router.patch("/:id", function (req, res, next) {
   })
   .then(food => {
     res.setHeader("Content-Type", "application/json")
-    res.status(202).send(JSON.stringify(food))
+    res.status(202).send(JSON.stringify(food[1][0]))
   })
   .catch(err => {
     res.status(400).send(JSON.stringify({ error: err }))

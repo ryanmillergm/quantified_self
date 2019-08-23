@@ -3,6 +3,7 @@ var request = require("supertest");
 var expect = require('chai').expect;
 var Food = require('../../../models').Food;
 var Meal = require('../../../models').Meal;
+var MealFood = require('../../../models').MealFood;
 
 describe('api v1 meals GET', function () {
   describe('user can get all meals in database', function () {
@@ -19,7 +20,7 @@ describe('api v1 meals GET', function () {
           name: "candy"
         }
       ]).then(() => {
-        return Meal.bulkcreate([
+        return Meal.bulkCreate([
           {
             id: 1,
             name: "breakfast"
@@ -30,7 +31,7 @@ describe('api v1 meals GET', function () {
           }
         ])
       }).then(() => {
-        return MealFood.bulkcreate([
+        return MealFood.bulkCreate([
           {
             FoodId: 1,
             MealId: 1
@@ -70,7 +71,7 @@ describe('api v1 meals GET', function () {
     });
 
     it('returns 200 if no foods', (done) => {
-      Meal.bulkcreate([
+      Meal.bulkCreate([
         {
           name: "breakfast"
         },

@@ -18,11 +18,15 @@ var specHelper = require('../../specHelper');
           .then(response => {
             let newFood = response.body;
             expect(response.statusCode).to.equal(201)
+            
             expect(newFood).to.include.all.keys('id', 'calories', 'name');
-            console.log(newFood)
-             expect(newFood.calories).to.equal(200);
+            expect(newFood.calories).to.equal(200);
             expect(newFood.name).to.equal('frog legs');
-           done();
+
+            expect(newFood).to.not.include.key("createdAt");
+            expect(newFood).to.not.include.key("updatedAt");
+
+            done();
           })
         });
 

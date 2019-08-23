@@ -30,11 +30,15 @@ describe('api v1 foods UPDATE', function () {
       })
       .then(response => {
         let updatedFood = response.body;
-        console.log(updatedFood)
         expect(response.statusCode).to.equal(202);
+        
         expect(updatedFood.name).to.equal('frog legs')
         expect(updatedFood.calories).to.equal(250)
-      done();
+
+        expect(updatedFood).to.not.include.key("createdAt");
+        expect(updatedFood).to.not.include.key("updatedAt");
+
+        done();
       })
     });
 

@@ -2,6 +2,7 @@ const Joi = require('@hapi/joi');
 var express = require("express");
 var router = express.Router();
 var Food = require('../../../models').Food;
+var foodSerializer = require('../../../util/serializers/food');
 
 /*GET all foods*/
 router.get("/", function (req, res, next) {
@@ -53,7 +54,7 @@ router.post("/", (req, res, next) => {
           calories: food.calories
     })
     .then(food => {
-      res.status(201).send(JSON.stringify(food));
+      res.status(201).send(JSON.stringify(foodSerializer(food)));
     })
     .catch(err => {
       res.status(400).send({error: err});
@@ -93,11 +94,10 @@ router.patch("/:id", function (req, res, next) {
       {
         returning: true
       })
-      .then(food => {
-        console.log(food)
-        response = food["dataValues"]
+      .then(response => {
+        food = response["dataValues"]
         res.setHeader("Content-Type", "application/json")
-        res.status(202).send(JSON.stringify(response))
+        res.status(202).send(JSON.stringify(foodSerializer(food)))
       })
     }
   })

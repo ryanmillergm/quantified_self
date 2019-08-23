@@ -6,18 +6,27 @@ var Food = require("../../../models").Food;
 
 /*GET all meals*/
 router.get("/", function(req, res, next) {
-  return Meal.findAll({
-    attributes: ["id", "name"],
-    include: [{
-        model: Food,
-        as: 'foods'
-    }]
+  return Meal.findAll({ include: 'foods'
+    // attributes: ["id", "name", "foods", "id", "name", "calories"],
+    // include: [{
+    //     model: Food,
+    //     as: 'foods',
+    //     attributes: ["id", "name", "calories"]
+    // }]
   })
   .then(meals => {
+    // console.log("first meal =")
+    // console.log(meals[0])
     res.setHeader("Content-Type", "application/json");
-    res.status(200).send(JSON.stringify(meals));
+    res
+      .status(200)
+      .send(
+        JSON.stringify(meals, ["id", "name", "foods", "id", "name", "calories"])
+      );
   })
   .catch(err => {
+    console.log('error =')
+    console.log(err)
     res.status(500).send(JSON.stringify({ error: err }));
   });
 });

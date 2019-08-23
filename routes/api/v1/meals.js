@@ -15,8 +15,6 @@ router.get("/", function(req, res, next) {
     // }]
   })
   .then(meals => {
-    // console.log("first meal =")
-    // console.log(meals[0])
     res.setHeader("Content-Type", "application/json");
     res
       .status(200)
@@ -25,8 +23,6 @@ router.get("/", function(req, res, next) {
       );
   })
   .catch(err => {
-    console.log('error =')
-    console.log(err)
     res.status(500).send(JSON.stringify({ error: err }));
   });
 });

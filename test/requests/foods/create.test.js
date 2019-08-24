@@ -10,17 +10,23 @@ var specHelper = require('../../specHelper');
       request(app)
         .post('/api/v1/foods')
           .send({
-            name: "frog legs",
-            calories: 200
+            food: {
+              name: "frog legs",
+              calories: 200
+            }
           })
           .then(response => {
             let newFood = response.body;
             expect(response.statusCode).to.equal(201)
+            
             expect(newFood).to.include.all.keys('id', 'calories', 'name');
-
-             expect(newFood.calories).to.equal(200);
+            expect(newFood.calories).to.equal(200);
             expect(newFood.name).to.equal('frog legs');
-           done();
+
+            expect(newFood).to.not.include.key("createdAt");
+            expect(newFood).to.not.include.key("updatedAt");
+
+            done();
           })
         });
 
@@ -28,7 +34,9 @@ var specHelper = require('../../specHelper');
       request(app)
         .post('/api/v1/foods')
           .send({
-            calories: 200
+            food: {
+              calories: 200
+            }
           })
           .then(response => {
             let noNameFood = response.body;
@@ -42,7 +50,9 @@ var specHelper = require('../../specHelper');
       request(app)
         .post('/api/v1/foods')
           .send({
-            name: "frog legs"
+            food: {
+              name: "frog legs"
+            }
           })
           .then(response => {
             let noCalorieFood = response.body;

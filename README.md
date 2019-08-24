@@ -63,7 +63,83 @@ Body:
     }
 ]
 ```
-
+### List one specific food by id in the database
+Request:
+```
+GET /api/v1/foods/:id
+Accept: application/json
+```
+Example response:
+```
+Status: 200
+Content-Type: application/json
+Body:
+{
+    "id": 1,
+    "name": "Banana",
+    "calories": 150
+}
+```
+### Create a new food
+Request:
+```
+POST /api/v1/foods
+Accept: application/json
+```
+Both name and calories are required fields.
+Pass in the following parameters in the body of the request:
+```
+{
+    "food": {
+        "name": "Name of food here",
+        "calories": "Calories here"
+      }
+}
+```
+Example response:
+```
+Status: 200
+Content-Type: application/json
+Body:
+{
+    "id": 1,
+    "name": "Banana",
+    "calories": 150
+}
+```
+Failed post response (did not include name or calorie):
+```
+Status: 400
+Body:
+{ "error": '"name" is a required field.' }
+```
+### Update an existing food by id in the database
+Request:
+```
+PATCH /api/v1/foods/:id
+Accept: application/json
+```
+Pass in the following parameters in the body of the request:
+```
+{
+    "food":
+      {
+        "name": "Mint",
+        "calories": "14"
+      }
+}
+```
+Example response:
+```
+Status: 200
+Content-Type: application/json
+Body:
+{
+    "id": 1,
+    "name": "Mint",
+    "calories": 14
+}
+```
 ### Remove a food from the database (based on the id)
 Request (enter the id of the food into `:id`):
 ```

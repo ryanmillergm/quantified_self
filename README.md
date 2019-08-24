@@ -206,6 +206,12 @@ Body:
     }
 ]
 ```
+### Deletes a food from a meal in the database
+Request:
+```
+DELETE /api/v1/meals/:meal_id/foods/:id
+Accept: application/json
+```
 
 ## Core Contributors
  - Alexandra Chakeres, [@chakeresa](https://github.com/chakeresa)

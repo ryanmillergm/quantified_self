@@ -62,6 +62,7 @@ describe('api v1 meals meal_id foods DELETE', function () {
           where: { MealId: 1 }
       }).then(mealFood => {
         expect(mealFood["dataValues"].FoodId).to.not.equal(1);
+        expect(mealFood["dataValues"].FoodId).equal(2);
 
         done();
         })

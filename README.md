@@ -22,6 +22,7 @@ View the project board at https://github.com/ryanmillergm/quantified_self/projec
  - Run server using latest file updates: nodemon
  - Run shell commands: shelljs
  - Make HTTP requests in tests: supertest
+ - Model validation: joi
 
 ## Local Setup
  - `$ git clone git@github.com:ryanmillergm/quantified_self.git`

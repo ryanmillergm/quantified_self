@@ -21,8 +21,8 @@ router.get("/", function(req, res, next) {
   });
 });
 
+/*DELETES a food from meal*/
 router.delete("/:id/foods/:food_id", function(req, res, next) {
-
   return MealFood.findOne({
     where: {
       MealId: req.params.id,
@@ -36,7 +36,7 @@ router.delete("/:id/foods/:food_id", function(req, res, next) {
         res.status(204).send();
       })
     } else {
-      res.status(404).send()
+      res.status(404).send();
     }
   })
   .catch(err => {

@@ -56,20 +56,19 @@ describe('api v1 meals meal_id foods DELETE', function () {
           .del(`/api/v1/meals/1/foods/1`)
       }).then(response => {
         expect(response.statusCode).to.equal(204);
-        expect(response.body).to.deep.equal({})
-      })
-      .then(() => {
+        expect(response.body).to.deep.equal({});
+      }).then(() => {
         return MealFood.findOne({
           where: { MealId: 1 }
-      })
-      .then(mealFood => {
-        expect(mealFood["dataValues"].FoodId).to.not.equal(1)
+      }).then(mealFood => {
+        expect(mealFood["dataValues"].FoodId).to.not.equal(1);
+
         done();
-      })
-      })
+        })
+      });
     });
 
-    it('returns 404 if no food has that id', (done) => {
+    it('returns 404 if no meal food has that id', (done) => {
       request(app)
       .del(`/api/v1/meals/12/foods/13`)
       .then(response => {

@@ -78,6 +78,58 @@ Failed deletion response (did not find a food with that id):
 Status: 404
 ```
 
+### List all meals in the database (along with their associated foods)
+Request:
+```
+GET /api/v1/meals
+Accept: application/json
+```
+Example response:
+```
+Status: 200
+Content-Type: application/json
+Body:
+[
+    {
+        "id": 1,
+        "name": "Breakfast",
+        "foods": [
+            {
+                "id": 1,
+                "name": "Banana",
+                "calories": 150
+            },
+            {
+                "id": 6,
+                "name": "Yogurt",
+                "calories": 550
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Snack",
+        "foods": [
+            {
+                "id": 1,
+                "name": "Banana",
+                "calories": 150
+            },
+            {
+                "id": 9,
+                "name": "Gum",
+                "calories": 50
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Lunch",
+        "foods": []
+    }
+]
+```
+
 ## Core Contributors
  - Alexandra Chakeres, [@chakeresa](https://github.com/chakeresa)
  - Ryan Miller, [@ryanmillergm](https://github.com/ryanmillergm)

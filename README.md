@@ -16,6 +16,7 @@ View the project board at https://github.com/ryanmillergm/quantified_self/projec
  - Database: PostgreSQL v7.12.1
  - ORM: Sequelize v5.15.1
  - Testing: Mocha v6.2.0 & Chai v4.2.0
+ - Test Coverage: Istanbul v14.1.1
 
 ## Other Packages
  - Secure ENV variable storage: dotenv

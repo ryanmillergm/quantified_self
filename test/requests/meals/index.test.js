@@ -49,7 +49,6 @@ describe('api v1 meals GET', function () {
         return request(app)
           .get('/api/v1/meals')
       }).then(response => {
-
         expect(response.statusCode).to.equal(200);
 
         expect(response.body).to.have.lengthOf(2);

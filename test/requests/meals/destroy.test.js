@@ -5,16 +5,6 @@ var Food = require('../../../models').Food;
 var Meal = require('../../../models').Meal;
 var MealFood = require('../../../models').MealFood;
 
-// DELETE /api/v1/meals/:meal_id/foods/:id
-
-// Removes the food with :id from the meal with :meal_id
-//
-// This deletes the existing record in the MealFoods table
-// that creates the relationship between this food and meal.
-// If the meal/food cannot be found, a 404 will be returned.
-//
-// If successful, this request will return a 204 status code.
-
 describe('api v1 meals meal_id foods DELETE', function () {
   describe('user can remove a food from meal in database', function () {
     it('returns 204 upon deletion', (done) => {
@@ -56,22 +46,30 @@ describe('api v1 meals meal_id foods DELETE', function () {
           }
         ])
       }).then(() => {
-        return Food.findOne({
-          where: {name: 'peas'}
+        return MealFood.findOne({
+          where: { MealId: 1 }
         })
-      }).then((food) => {
-        expect(food.name).to.equal('peas');
+      }).then((mealFood) => {
+        console.log("mealFood:")
+        console.log(mealFood["dataValues"])
+        expect(mealFood.FoodId).to.equal(1);
 
         return request(app)
-          .del(`/api/v1/meals/1/foods/${food.id}`)
+          .del(`/api/v1/meals/1/foods/1`)
       }).then(response => {
         expect(response.statusCode).to.equal(204);
-
-      }).then((meal) => {
-        console.log(meal)
-        expect(meal.food).to.equal([]);
-
+        expect(response.body).to.deep.equal({})
+      })
+      .then(() => {
+        return MealFood.findOne({
+          where: { MealId: 1 }
+      })
+      .then(mealFood => {
+        console.log("mealFood:----------")
+        console.log(mealFood["dataValues"])
+        expect(mealFood["dataValues"].FoodId).to.not.equal(1)
         done();
+      })
       })
     });
 
@@ -86,6 +84,3 @@ describe('api v1 meals meal_id foods DELETE', function () {
     });
   });
 });
-
-// { id: 1, name: 'breakfast', foods: [ [Object], [Object] ] },
-//  { id: 2, name: 'lunch', foods: [ [Object] ] } ]

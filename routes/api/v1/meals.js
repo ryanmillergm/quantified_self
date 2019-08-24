@@ -21,12 +21,6 @@ router.get("/", function(req, res, next) {
   });
 });
 
-// router.delete("/api/v1/meals/:meal_id/foods/:id", function(req, res, next) {
-//   return Meal.findByPk(req.params.meal_id)
-// }).then(meal => {
-//   console.log(meal)
-// }))
-
 router.delete("/:id/foods/:food_id", function(req, res, next) {
 
   return MealFood.findOne({
@@ -36,8 +30,6 @@ router.delete("/:id/foods/:food_id", function(req, res, next) {
     }
   })
   .then(mealFood => {
-    // console.log("-=-=-=-=-=-=-=-=-")
-    // console.log(mealFood["dataValues"])
     if (mealFood) {
       return mealFood.destroy()
       .then(() => {

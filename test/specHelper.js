@@ -24,10 +24,3 @@ beforeEach(async function() {
   console.log("destroying all meals...")
   await Meal.destroy({ where: {} })
 });
-
-// after(function() {
-  //   console.log("global after hook starting...")
-  // this.timeout(20000);
-//   console.log("dropping database...")
-//   shell.exec('npx sequelize db:drop');
-// });

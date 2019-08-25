@@ -3,7 +3,6 @@ var router = express.Router();
 var Meal = require("../../../models").Meal;
 var MealFood = require("../../../models").MealFood;
 var Food = require("../../../models").Food;
-var MealFood = require("../../../models").MealFood;
 
 /*GET all meals*/
 router.get("/", function(req, res, next) {

@@ -232,6 +232,13 @@ Content-Type: application/json
 Body:
 { "error": "No food found with id 2" }
 ```
+Example failed response (if the food is already a part of the meal):
+```
+Status: 422
+Content-Type: application/json
+Body:
+{ "error": "There is already pancakes in breakfast" }
+```
 
 ## Core Contributors
  - Alexandra Chakeres, [@chakeresa](https://github.com/chakeresa)

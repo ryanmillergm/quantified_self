@@ -23,6 +23,7 @@ View the project board at https://github.com/ryanmillergm/quantified_self/projec
  - Run shell commands: shelljs
  - Make HTTP requests in tests: supertest
  - Model validation: joi
+ - Test coverage: nyc (Istanbul)
 
 ## Local Setup
  - `$ git clone git@github.com:ryanmillergm/quantified_self.git`

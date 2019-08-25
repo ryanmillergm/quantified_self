@@ -207,6 +207,41 @@ Body:
     }
 ]
 ```
+
+### Add an association between an existing meal and an existing food
+Request:
+```
+POST /api/v1/meals/:meal_id/foods/:food_id
+Accept: application/json
+```
+Example successful response:
+```
+Status: 201
+Content-Type: application/json
+Body:
+{ "message": "Successfully added pancakes to breakfast" }
+```
+Example failed response (if there is no meal with the ID in the URL):
+```
+Status: 404
+Content-Type: application/json
+Body:
+{ "error": "No meal found with id 3" }
+```
+Example failed response (if there is no food with the ID in the URL):
+```
+Status: 404
+Content-Type: application/json
+Body:
+{ "error": "No food found with id 2" }
+```
+Example failed response (if the food is already a part of the meal):
+```
+Status: 422
+Content-Type: application/json
+Body:
+{ "error": "There is already pancakes in breakfast" }
+
 ### Deletes a food from a meal in the database
 Request:
 ```

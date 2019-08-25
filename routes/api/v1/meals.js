@@ -58,8 +58,9 @@ router.post("/:mealId/foods/:foodId", function(req, res, next) {
     if (err.name == 'SequelizeUniqueConstraintError') {
       let error = { error: `There is already ${foodName} in ${mealName}` };
       res.status(422).send(JSON.stringify(error));
+    } else {
+      res.status(500).send(JSON.stringify({ error: err }));
     }
-    res.status(500).send(JSON.stringify({ error: err }));
   });
 });
 

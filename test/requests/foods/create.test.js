@@ -81,9 +81,8 @@ var expect = require('chai').expect;
               .then(response => {
                 expect(response.statusCode).to.equal(422);
 
-                expect(response.body.error.errors[0].message).to.equal(
-                  "name must be unique"
-                );
+                let expected = { error: "That food name is already taken" };
+                expect(response.body).to.deep.equal(expected);
 
                 done();
               });

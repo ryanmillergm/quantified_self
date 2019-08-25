@@ -19,7 +19,7 @@ describe("api v1 meals :meal_id foods :id POST", function() {
           calories: "300",
           name: "candy"
         }
-      ]).then(() => {
+      ]).then(foods => {
         return Meal.bulkCreate([
           {
             id: 1,
@@ -30,7 +30,7 @@ describe("api v1 meals :meal_id foods :id POST", function() {
             name: "lunch"
           }
         ])
-      }).then(foods => {
+      }).then(meals => {
         return request(app)
           .post("/api/v1/meals/1/foods/2")
       }).then(response => {
@@ -38,6 +38,52 @@ describe("api v1 meals :meal_id foods :id POST", function() {
         
         let body = response.body;
         let expected = { message: "Successfully added candy to breakfast" };
+        expect(body).to.deep.equal(expected);
+
+        return MealFood.count();
+      }).then((count) => {
+        expect(count).to.equal(1);
+
+        done();
+      });
+    });
+
+    it("returns 422 if the association already exists", done => {
+      Food.bulkCreate([
+        {
+          id: 1,
+          calories: "10",
+          name: "peas"
+        },
+        {
+          id: 2,
+          calories: "300",
+          name: "candy"
+        }
+      ]).then(foods => {
+        return Meal.bulkCreate([
+          {
+            id: 1,
+            name: "breakfast"
+          },
+          {
+            id: 2,
+            name: "lunch"
+          }
+        ])
+      }).then(meals => {
+        return MealFood.create({
+          MealId: 1,
+          FoodId: 2
+        })
+      }).then(mealFoods => {
+        return request(app)
+          .post("/api/v1/meals/1/foods/2")
+      }).then(response => {
+        expect(response.statusCode).to.equal(422);
+        
+        let body = response.body;
+        let expected = { error: "There is already candy in breakfast" };
         expect(body).to.deep.equal(expected);
 
         return MealFood.count();

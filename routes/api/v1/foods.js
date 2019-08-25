@@ -57,7 +57,11 @@ router.post("/", (req, res, next) => {
       res.status(201).send(JSON.stringify(foodSerializer(food)));
     })
     .catch(err => {
-      res.status(400).send({error: err});
+      if (err.name == "SequelizeUniqueConstraintError") {
+        res.status(422).send(JSON.stringify({error: 'That food name is already taken'}));
+      } else {
+        res.status(500).send(JSON.stringify({error: err}));
+      }
    });
  })
 

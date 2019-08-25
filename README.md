@@ -88,7 +88,7 @@ Request:
 POST /api/v1/foods
 Accept: application/json
 ```
-Both name and calories are required fields.
+Both name and calories are required fields. Food names must be unique.
 Pass in the following parameters in the body of the request:
 ```
 {
@@ -98,7 +98,7 @@ Pass in the following parameters in the body of the request:
       }
 }
 ```
-Example response:
+Example successful response:
 ```
 Status: 200
 Content-Type: application/json
@@ -109,11 +109,17 @@ Body:
     "calories": 150
 }
 ```
-Failed post response (did not include name or calorie):
+Failed response (did not include name or calorie):
 ```
 Status: 400
 Body:
 { "error": '"name" is a required field.' }
+```
+Failed response (duplicate food name):
+```
+Status: 422
+Body:
+{ "error": "That food name is already taken" }
 ```
 ### Update an existing food by id in the database
 Request:

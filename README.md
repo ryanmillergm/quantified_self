@@ -212,6 +212,14 @@ Request:
 DELETE /api/v1/meals/:meal_id/foods/:id
 Accept: application/json
 ```
+Successful Response:
+```
+Status: 204
+```
+Failed Response (if there is no MealFood found with the IDs provided in the URL):
+```
+Status: 404
+```
 
 ## Core Contributors
  - Alexandra Chakeres, [@chakeresa](https://github.com/chakeresa)

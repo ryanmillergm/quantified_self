@@ -64,10 +64,42 @@ describe('api v1 meals meal_id foods DELETE', function () {
       });
     });
 
-    it('returns 404 if no meal food has that id', (done) => {
-      request(app)
-      .del(`/api/v1/meals/12/foods/13`)
-      .then(response => {
+    it('returns 404 if no meal has that id', (done) => {
+      Food.bulkCreate([
+        {
+          id: 1,
+          calories: "10",
+          name: "peas"
+        },
+        {
+          id: 2,
+          calories: "300",
+          name: "candy"
+        }
+      ]).then(() => {
+        return request(app)
+          .del(`/api/v1/meals/12/foods/1`)
+      }).then(response => {
+        expect(response.statusCode).to.equal(404);
+
+        done();
+      })
+    });
+
+    it('returns 404 if no food has that id', (done) => {
+      Meal.bulkCreate([
+        {
+          id: 1,
+          name: "breakfast"
+        },
+        {
+          id: 2,
+          name: "lunch"
+        }
+      ]).then(() => {
+        return request(app)
+          .del(`/api/v1/meals/2/foods/13`)
+      }).then(response => {
         expect(response.statusCode).to.equal(404);
 
         done();

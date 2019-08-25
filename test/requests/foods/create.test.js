@@ -59,5 +59,35 @@ var expect = require('chai').expect;
             done();
           })
         })
+
+      it('returns "name must be unique" if the food is already in database', done => {
+        request(app)
+          .post("/api/v1/foods")
+          .send({
+            food: {
+              name: "Mint",
+              calories: 14
+            }
+          })
+          .then(() => {
+            request(app)
+              .post("/api/v1/foods")
+              .send({
+                food: {
+                  name: "Mint",
+                  calories: 30
+                }
+              })
+              .then(response => {
+                expect(response.statusCode).to.equal(422);
+
+                expect(response.body.error.errors[0].message).to.equal(
+                  "name must be unique"
+                );
+
+                done();
+              });
+          });
+      });
   });
 });

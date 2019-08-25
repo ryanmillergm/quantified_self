@@ -206,7 +206,7 @@ Body:
     }
 ]
 ```
-### Add an association between existing meals and foods
+### Add an association between an existing meal and an existing food
 Request:
 ```
 POST /api/v1/meals/:meal_id/foods/:food_id

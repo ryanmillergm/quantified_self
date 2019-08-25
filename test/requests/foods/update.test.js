@@ -82,8 +82,6 @@ describe('api v1 foods :id PATCH', function () {
       request(app)
       .patch('/api/v1/foods/54')
       .then(response => {
-        console.log(response.statusCode)
-        console.log(response.body)
         expect(response.statusCode).to.equal(400);
 
         done();

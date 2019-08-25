@@ -57,10 +57,10 @@ describe('api v1 meals GET', function () {
         expect(firstMeal).to.include.all.keys('id', 'name', 'foods');
         expect(firstMeal).to.not.include.key('createdAt');
         expect(firstMeal).to.not.include.key('updatedAt');
-        
+
         expect(firstMeal.name).to.equal('breakfast');
         expect(firstMeal.foods).to.have.lengthOf(2);
-        
+
         let firstFood = firstMeal.foods[0];
         expect(firstFood).to.include.all.keys('id', 'name', 'calories')
         expect(firstFood).to.not.include.key('createdAt');
@@ -83,7 +83,7 @@ describe('api v1 meals GET', function () {
             .get('/api/v1/meals')
             .then(response => {
               expect(response.statusCode).to.equal(200);
-    
+
               expect(response.body).to.have.lengthOf(2);
 
               let firstMeal = response.body[0];

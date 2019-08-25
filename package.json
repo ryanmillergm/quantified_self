@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "export NODE_ENV=test && mocha --recursive"
+    "test": "export NODE_ENV=test && nyc mocha --recursive"
   },
   "dependencies": {
     "@hapi/joi": "^15.1.1",
@@ -22,6 +22,7 @@
     "chai": "^4.2.0",
     "mocha": "^6.2.0",
     "nodemon": "^1.19.1",
+    "nyc": "^14.1.1",
     "shelljs": "^0.8.3",
     "supertest": "^4.0.2"
   }

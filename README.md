@@ -23,6 +23,7 @@ View the project board at https://github.com/ryanmillergm/quantified_self/projec
  - Run shell commands: shelljs
  - Make HTTP requests in tests: supertest
  - Model validation: joi
+ - Test coverage: nyc (Istanbul)
 
 ## Local Setup
  - `$ git clone git@github.com:ryanmillergm/quantified_self.git`
@@ -206,6 +207,7 @@ Body:
     }
 ]
 ```
+
 ### Add an association between an existing meal and an existing food
 Request:
 ```
@@ -239,6 +241,20 @@ Status: 422
 Content-Type: application/json
 Body:
 { "error": "There is already pancakes in breakfast" }
+
+### Deletes a food from a meal in the database
+Request:
+```
+DELETE /api/v1/meals/:meal_id/foods/:id
+Accept: application/json
+```
+Successful Response:
+```
+Status: 204
+```
+Failed Response (if there is no MealFood found with the IDs provided in the URL):
+```
+Status: 404
 ```
 
 ## Core Contributors

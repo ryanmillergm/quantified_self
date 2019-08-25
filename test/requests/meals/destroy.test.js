@@ -46,26 +46,21 @@ describe('api v1 meals meal_id foods DELETE', function () {
           }
         ])
       }).then(() => {
-        return MealFood.findOne({
-          where: { MealId: 1 }
-        })
-      }).then((mealFood) => {
-        expect(mealFood.FoodId).to.equal(1);
+        return MealFood.count()
+      }).then((count) => {
+        expect(count).to.equal(3);
 
         return request(app)
           .del(`/api/v1/meals/1/foods/1`)
       }).then(response => {
         expect(response.statusCode).to.equal(204);
         expect(response.body).to.deep.equal({});
-      }).then(() => {
-        return MealFood.findOne({
-          where: { MealId: 1 }
-      }).then(mealFood => {
-        expect(mealFood["dataValues"].FoodId).to.not.equal(1);
-        expect(mealFood["dataValues"].FoodId).equal(2);
+
+        return MealFood.count()
+      }).then(count => {
+        expect(count).to.equal(2);
 
         done();
-        })
       });
     });
 

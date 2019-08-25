@@ -210,6 +210,7 @@ Body:
 Request:
 ```
 POST /api/v1/meals/:meal_id/foods/:food_id
+Accept: application/json
 ```
 Example successful response:
 ```

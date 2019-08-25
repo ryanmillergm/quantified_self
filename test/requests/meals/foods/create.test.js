@@ -31,8 +31,8 @@ describe("api v1 meals :meal_id foods :id POST", function() {
           }
         ])
       }).then(foods => {
-        request(app)
-        .post("/api/v1/meals/1/foods/2")
+        return request(app)
+          .post("/api/v1/meals/1/foods/2")
       }).then(response => {
         expect(response.statusCode).to.equal(201);
         
@@ -61,7 +61,7 @@ describe("api v1 meals :meal_id foods :id POST", function() {
           name: "candy"
         }
       ]).then(() => {
-        request(app)
+        return request(app)
           .post("/api/v1/meals/3/foods/1")
       })
       .then(response => {
@@ -86,7 +86,8 @@ describe("api v1 meals :meal_id foods :id POST", function() {
           name: "lunch"
         }
       ]).then(() => {
-        request(app).post("/api/v1/meals/2/foods/1");
+        return request(app)
+          .post("/api/v1/meals/2/foods/1");
       }).then(response => {
         expect(response.statusCode).to.equal(404);
 

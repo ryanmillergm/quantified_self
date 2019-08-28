@@ -1,6 +1,8 @@
 # Quantified Self
 This REST API has several endpoints for basic CRUD functionality of **foods** and **meals**. Food and meals are joined with **mealfood** with a many to many relationship. All responses are JSON.
 
+See the recipe micro-service repo [here](https://github.com/chakeresa/recipe_microservice). It is deployed at https://recipe-microservice.herokuapp.com/.
+
 The app is deployed at https://nutritionaltracker.herokuapp.com/.
 
 This project was part of [Turing School of Software & Design](https://turing.io)'s Back End Engineering program (Mod 4). See the project spec [here](https://backend.turing.io/module4/projects/quantified_self/qs_server_side). It was completed in 10 days by [Alexandra Chakeres](https://github.com/chakeresa) and [Ryan Miller](https://github.com/ryanmillergm).

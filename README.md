@@ -1,5 +1,5 @@
 # Quantified Self
-This REST API... (TODO) All responses are JSON.
+This REST API has several endpoints for basic CRUD functionality of **foods** and **meals**. Food and meals are joined with **mealfood** with a many to many relationship. All responses are JSON.
 
 The app is deployed at https://nutritionaltracker.herokuapp.com/.
 
@@ -271,3 +271,6 @@ Status: 404
  - Fork and clone the [repo](https://github.com/ryanmillergm/quantified_self)
  - Make changes on your fork & push them to GitHub
  - Visit https://github.com/ryanmillergm/quantified_self/pulls and click `New pull request`
+
+## Known Issues
+ - None
